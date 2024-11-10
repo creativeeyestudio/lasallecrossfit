@@ -1,0 +1,32 @@
+.container{
+    @extend .margin-auto;
+    max-width: 1400px;
+    &-fluid{
+        max-width: 100%;
+    }
+}
+
+.row {
+    @extend .d-flex;
+    flex-wrap: wrap;
+    padding: 0 calc($marge-d-x / 2);
+    &-no-marge{
+        @extend .row;
+        padding: 0; 
+        .col{
+            @extend .col;
+        }
+    } 
+    @media screen and (max-width: $md) {
+        padding: 0 calc($marge-m / 2);
+        &-no-marge{
+            padding: 0;  
+        } 
+    }
+    .col {
+        @include flexBlockInit(); // Grille de base
+        @each $breakpoint, $max-width in $breakpoints {
+            @include respFlexBlockInit($breakpoint, $max-width);
+        }
+    }
+}  

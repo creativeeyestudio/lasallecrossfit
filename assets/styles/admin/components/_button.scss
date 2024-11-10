@@ -1,0 +1,14 @@
+button{
+    @include btn-design(true);
+    // height: 100%;
+}
+
+.btn-link{
+    @include btn-design(true);
+    text-decoration: none;
+}
+
+.btn-link-2{
+    @include btn-design(false);
+    text-decoration: none;
+}

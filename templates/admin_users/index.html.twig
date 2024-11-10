@@ -1,0 +1,21 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <section class="block">
+        <a class="btn-link float-right" href="{{ path('app_admin_register') }}">Ajouter un utilisateur</a>
+        <h2>Liste des utilisateurs</h2>
+        {% for user in users %}
+        <div class="line">
+            <p>{{ user.firstname }} {{ user.lastname }}</p>
+            <ul>
+                {% if is_granted('ROLE_EDITOR') %}
+                    <li><a href="{{ path('admin_users_modify', { id: user.id }) }}">Modifier</a></li>
+                    <li><a href="{{ path('admin_users_delete', { id: user.id }) }}">Supprimer</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

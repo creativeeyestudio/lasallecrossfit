@@ -1,0 +1,21 @@
+label{
+    @extend .d-block;
+    margin-bottom: 10px
+}
+
+input {
+    &[type=text],
+    &[type=email],
+    &[type=tel]{
+        @include formStyle();
+    }
+}
+
+button{
+    border: none;
+}
+
+textarea{
+    @include formStyle();
+    min-height: 150px;
+}

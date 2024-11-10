@@ -1,0 +1,106 @@
+/* #region Width */
+.wd{
+    @include sizeInitType('width');
+}
+
+.min-wd{
+    @include sizeInitType('min-width');
+}
+
+.max-wd{
+    @include sizeInitType('max-width');
+}
+/* #endregion Width */
+
+
+/* #region Height */
+.ht{
+    @include sizeInitType('height');
+}
+
+.min-ht{
+    @include sizeInitType('min-height');
+}
+
+.max-ht{
+    @include sizeInitType('max-height');
+}
+/* #endregion Height */
+
+
+/* #region Border */
+.border{
+    @each $value in $border-directions {
+        @if $value == all {
+            &-all{
+                border: 1px solid grey;
+                &-no {
+                    @include borderResp(0, null);
+                }
+                &-on {
+                    @include borderResp(1, null);
+                }
+            }
+        } @else {
+            &-#{$value} {
+                border-#{$value}: 1px solid grey;
+                &-no {
+                    @include borderResp(0, $value);
+                }
+                &-on {
+                    @include borderResp(1, $value);
+                }    
+            }    
+        }
+    }
+}
+/* #endregion Border */
+
+
+/* #region Position */
+.position{
+    @each $class, $value in $positions {
+        &-#{$class} {
+            @include positionInit($value);
+        }
+    }
+}
+/* #endregion Position */
+
+
+/* #region Text */
+.text{
+    @each $value in $text-transform-values {
+        &-#{$value} {
+            @include textTransform($value);
+        }
+    }
+    @each $value in $text-align-values {
+        &-#{$value} {
+            @include textAlign($value);
+        }
+    }
+}
+/* #endregion Text */
+
+
+/* #region Margin / Padding */
+.padding{
+    @include margeType('padding');
+}
+
+.margin{
+    @include margeType('margin');
+}
+/* #endregion Margin / Padding */
+
+
+/* #region Display */
+.d{
+    @each $class, $value in $displayValues {
+        &-#{$class} {
+            @include displayInit($value);
+        }
+    }
+}
+/* #endregion Display */

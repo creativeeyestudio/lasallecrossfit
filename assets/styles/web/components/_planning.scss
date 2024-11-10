@@ -1,0 +1,13 @@
+#planning-content{
+    overflow-x: auto;
+}
+
+.planning{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    th, td{
+        border: .0625rem solid white;
+        padding: 1rem;
+    }
+}

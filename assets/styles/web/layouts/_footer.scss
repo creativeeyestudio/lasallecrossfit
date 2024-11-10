@@ -1,0 +1,16 @@
+footer{
+    padding: $marge-m;
+    ul{
+        // padding: 0;
+        @extend .padding-none;
+        @extend .d-flex-no-md;
+        list-style-type: none;
+        @media screen and (min-width: $md) {
+            justify-content: center;
+            gap: $marge-m;
+        }
+    }
+    p, li{
+        @include font(400, 16, false, $ff-body);
+    }
+}

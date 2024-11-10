@@ -1,0 +1,34 @@
+.popup {
+    @extend .position-fixed;
+    @extend .wd-100;
+    @extend .ht-100;
+    @extend .d-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+    color: #fff;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: .75);
+    transition-duration: .5s;
+    &.removed {
+        top: -100vh;
+        opacity: 0;
+    }
+    .content-img{
+        width: 640px;
+        max-width: 85%;
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.close-popup {
+    @extend .position-fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+
+}

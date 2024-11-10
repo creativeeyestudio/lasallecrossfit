@@ -1,0 +1,19 @@
+body:not(.no-js) {
+    [data-aos=reveal-left] {
+        @include aosStyle('horizontal');
+    }
+
+    [data-aos=reveal-right] {
+        @include aosStyle('horizontal');
+        transform-origin: 100% 0;
+    }
+
+    [data-aos=reveal-top] {
+        @include aosStyle('vertical');
+    }
+
+    [data-aos=reveal-bottom] {
+        @include aosStyle('vertical');
+        transform-origin: 0 100%;
+    }    
+}

@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+}
+
+::selection{
+    color: black;
+    background-color: $colorPrimary;
+}
+
+body{
+    @extend .margin-none;
+    font-size: #{$fsBody}px;
+    font-family: $ff-body;
+    letter-spacing: 0.04em;
+
+    @media screen and (min-width: $lg) {
+        margin-left: $nav-width;
+        &.no-js{
+            margin-left: 0;
+        }
+    }   
+    
+    @media screen and (max-width: $md) {
+        margin-bottom: $navbar;
+    }
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+    @media screen and (min-width: $md) {
+        transition-duration: .5s;
+        &:hover{
+            color: $colorPrimary;
+        }
+    }
+}
+
+figure{
+    margin: 0;
+}
+
+.scroll-content{
+    @media screen and (min-width: $lg) {
+        height: 100vh;
+    }
+}
+
+.bg-dark{
+    color: $colorWt;
+    background-color: $colorBk;
+}
+
+.rgpd-text{
+    font-size: .85em;
+    margin-left: 1rem;
+}
+
+.response{
+    padding: 1rem;
+    &-success{
+        @extend .response;
+        color: #198754;
+        background-color: #d1e7dd;
+    }
+    &-danger{
+        @extend .response;
+        color: #dc3545;
+        background-color: #f8d7da;
+    }
+}
+
+.cover-img{
+    @extend .margin-none;
+    @extend .position-relative;
+    img{
+        @extend .position-absolute;
+        @extend .wd-100;
+        @extend .ht-100;
+        object-fit: cover
+    }
+    &-no{
+        &-md{
+            &-32-9{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 32/9;
+                }
+            }
+            &-21-9{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 21/9;
+                }
+            }
+            &-16-9{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 16/9;
+                }
+            }
+            &-4-3{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 4/3;
+                }
+            }
+            &-3-4{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 3/4;
+                }
+            }        
+        }
+        &-sm{
+            &-32-9{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 32/9;
+                }
+            }
+            &-21-9{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 21/9;
+                }
+            }
+            &-16-9{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 16/9;
+                }
+            }
+            &-4-3{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 4/3;
+                }
+            }
+            &-3-4{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 3/4;
+                }
+            }        
+        }
+    }
+    
+}

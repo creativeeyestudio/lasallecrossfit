@@ -1,0 +1,29 @@
+#contact{
+    form{
+        .form-row{
+            @extend .d-flex;
+            gap: 2rem;
+            *{
+                flex-grow: 1;
+                flex-basis: 0;
+            }
+        }
+        p{
+            margin-bottom: 2rem;
+        }
+    }
+    @media screen and (max-width: $md) {
+        form{
+            margin-top: $marge-m;
+        }
+    }
+    @media screen and (max-width: $xs) {
+        form{
+            margin-top: $marge-m;
+            .form-row{
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    }
+}

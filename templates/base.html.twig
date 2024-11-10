@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html 
+    dir="ltr" 
+    lang="{% block lang %}{% endblock %}" >
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="description" content="{% block desc %}{% endblock %}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index, follow">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="../uploads/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../uploads/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../uploads/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="../uploads/images/favicon/site.webmanifest">
+        <link rel="mask-icon" href="../uploads/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="../uploads/images/favicon/favicon.ico">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-config" content="../uploads/images/favicon/browserconfig.xml">
+        <meta name="theme-color" content="#ffffff">
+
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tarteaucitronjs/1.11.0/css/tarteaucitron.min.css" integrity="sha512-An5uG5l2933DG8oK8mICT7TycnhhY2Ti1xVSj2XW/scxb0jRvE1kLUh8ECth38zr+MlE4LH3l5xblJ+Ns0JINg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% endblock %}
+    </head>
+    <body
+        {{ stimulus_controller('symfony/ux-swup/swup', {
+            containers: ['#main', '#nav'],
+            animationSelector: '[class*="transition-"]',
+            theme: 'fade',
+            animateHistoryBrowsing: true,
+            cache: true,
+            debug: false
+        }) }}
+        data-damping='{% block damping %}{% endblock %}'
+        data-scrollimg='{% block scrollimg %}{% endblock %}'>
+
+        <!-- Popup -->
+        <div class="popup">
+            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="24" viewBox="0 0 384 512" class="close-popup">
+                <!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                <path fill="#ffffff" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+            </svg>
+            <figure class="content-img">
+                <a href="https://booking.lasallecrossfit.fr/produit/carte-cadeau/" target="_blank" rel="noopener noreferrer">
+                    <img src="../uploads/images/popup.png" alt="Élevez le niveau de fitness avec La Salle CrossFit ! Offrez notre Carte Cadeau pour une expérience fitness exceptionnelle !" />
+                </a>
+            </figure>
+            <figcaption class="text-center">Cliquez sur l'image pour accéder à l'offre</figcaption>
+        </div>
+
+        {% include "webpages/blocks/header.html.twig" %}
+        <div id="content">
+            <div id="website">
+                <main id="main">
+                    {% block body %}{% endblock %}
+                </main>
+            </div>
+            {% include "webpages/blocks/footer.html.twig" %}
+        </div>
+        <div class="navbar-mob bg-dark position-fixed d-none-no-md wd-100">
+            <div class="nav-content d-flex wd-100 ht-100 padding-horizontal-on-md">
+                <a href="#contact">
+                    <i class="fa-2x fa-regular fa-envelope" style="color: #ffffff;"></i>
+                </a>
+                <span class="toggle-nav">
+                    <i class="fa-2x fa-solid fa-bars" style="color: #ffffff;"></i>
+                </span>
+                <a href="#main">
+                    <i class="fa-2x fa-solid fa-angle-up" style="color: #ffffff;"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Loader -->
+        <div class="loader">
+            <figure>
+                <img src="../uploads/images/logo/loader.png" alt="Loader">
+            </figure>
+        </div>
+
+        {% block javascripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tarteaucitronjs/1.11.0/tarteaucitron.js" integrity="sha512-bDyrKjNycnlzdeKsBI4TOHhiDmAx9LtNkZo/IfdLZGlzYTREqmAdvgHy876IOBfZ7UUq7mIz4t4ZHoG8w/xTdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            {{ encore_entry_script_tags('modernizr') }}
+            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('tarteaucitronjs') }}
+         {% endblock %}
+    </body>
+</html>

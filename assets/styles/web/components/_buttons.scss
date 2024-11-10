@@ -1,0 +1,67 @@
+.btn{
+    &-primary{
+        @include font(400, $fsBody, false, $ff-body);
+        padding: 1rem 3rem;
+        color: $colorBk;
+        background-color: $colorPrimary;
+        border-radius: 4rem;
+        border: 1px solid rgba($color: $colorWt, $alpha: 0);
+        transition-duration: .75s;
+        cursor: pointer;
+        @media screen and (min-width: $md) {
+            &:hover{
+                color: $colorWt;
+                background-color: $colorBk;
+                border-radius: 0;
+                border: 1px solid rgba($color: $colorWt, $alpha: 1);
+            }
+        }
+        &_news-form{
+            @extend .btn-primary;
+            padding: .5rem 1rem;
+            border-radius: 0;
+        }
+    }
+    
+    &-secondary{
+        @extend .text-uppercase;
+        @extend .position-relative;
+        text-decoration: none;
+        width: fit-content;
+        transition-duration: .5s;
+        a{
+            display: contents;
+            &::after{
+                content: '';
+                @extend .position-absolute;
+                bottom: -3px;
+                left: 0;
+                width: 25%;
+                height: 2px;
+                background-color: $colorBk;
+                transition-duration: 1s;
+            }
+        }
+        @media screen and (min-width: $md) {
+            a{
+                &:hover{
+                    &::after{
+                        width: 100%;
+                        background-color: $colorPrimary;
+                    }   
+                }    
+            }
+            
+        }
+        
+        &_wt{
+            @extend .btn-secondary;
+            color: $colorWt;
+            a{
+                &::after{
+                    background-color: $colorWt;
+                }    
+            }
+        }
+    }
+}

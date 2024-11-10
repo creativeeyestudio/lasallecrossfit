@@ -1,0 +1,23 @@
+.parallax-section {
+	@extend .position-relative;
+	@extend .d-none-on-md;
+    padding-top: 45%;
+    overflow: hidden;
+	background-color: lightcoral;
+}
+
+.parallax-element{
+	@extend .wd-100;
+	@extend .position-absolute;
+	height: calc(100% * 1.5);
+	top: 0;
+	left: 0;
+	img{
+		@extend .position-absolute;
+		@extend .wd-100;
+		@extend .ht-100;
+		top: 0;
+		left: 0;
+		object-fit: cover;
+	}
+}

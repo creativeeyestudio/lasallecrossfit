@@ -1,0 +1,16 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        site_name: "La salle Crossfit"
+        version: "2.8"
+        date_update: "29/10/2023"
+        google_maps: ""
+        recaptcha_public: ''
+        recaptcha_private: ''
+        mailjet_public: ''
+        mailjet_private: ''
+        posts_img_directory: '/uploads/images/posts'
+
+when@test:
+    twig:
+        strict_variables: true

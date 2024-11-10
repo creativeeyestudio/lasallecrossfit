@@ -1,0 +1,9 @@
+.navbar-mob {
+    height: $navbar;
+    bottom: 0;
+    left: 0;
+    .nav-content{
+        justify-content: space-between;
+        align-items: center;
+    }
+}

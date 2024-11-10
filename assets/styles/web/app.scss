@@ -1,0 +1,33 @@
+// ABSTRACTS
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+// COMPONENTS
+@import './components/heroscreen';
+@import './components/parallax';
+@import './components/grid';
+@import './components/utils';
+@import './components/buttons';
+@import './components/newsletter';
+@import './components/maps';
+@import './components/navbar';
+@import './components/anims';
+@import './components/planning';
+@import './components/card-team';
+@import './components/popup';
+@import './components/loader';
+
+// BASE
+@import './base/reset';
+@import './base/typography';
+
+// LAYOUT
+@import './layouts/header';
+@import './layouts/footer';
+@import './layouts/navigation';
+@import './layouts/forms';
+
+// PAGES
+@import './pages/about';
+@import './pages/cours';
+@import './pages/contact';

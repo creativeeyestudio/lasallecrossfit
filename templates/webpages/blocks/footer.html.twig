@@ -1,0 +1,29 @@
+<div class="newsletter bg-dark padding-vertical-on-md">
+	<div class="container">
+		<div class="row">
+			<div class="col-4 col-xs-12">
+				<p class="newsletter-title">Inscrivez vous à notre newsletter</p>
+			</div>
+			<div class="col-8 col-xs-12">
+				{{ form_start(news_form) }}
+					{{ form_row(news_form.email) }}
+					{{ form_row(news_form.submit) }}
+					<span class="news-rgpd rgpd-text d-flex">
+					{{ form_widget(news_form.rgpd) }}
+					{{ form_label(news_form.rgpd) }}
+					</span>
+				{{ form_end(news_form) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="text-center padding-all-on-md">
+	<nav class="footer-nav">
+		<ul>
+			{{ include('webpages/blocks/_navigation.html.twig', { pos: 2 }) }}
+			<li><a onclick="tarteaucitron.userInterface.openPanel();">Cookies</a></li>
+		</ul>
+	</nav>
+	<p>Rédaction et SEO : <a href="https://www.agence-gestion-com.fr" target="_blank" rel="noopener">AGC Web</a> | Design et développement : <a href="https://www.creative-eye.fr" target="_blank" rel="noopener">Creative Eye Studio</a></p>
+</footer>

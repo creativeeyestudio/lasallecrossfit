@@ -1,0 +1,8 @@
+#about{
+    @media screen and (min-width: $lg) {
+        img{
+            top: -#{$marge-d-y};
+            bottom: $marge-d-y;
+        }
+    }    
+}

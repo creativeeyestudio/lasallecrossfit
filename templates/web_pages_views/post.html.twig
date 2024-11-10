@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{# Langue #}
+{% block lang %}{{ lang_page }}{% endblock %}
+{# Metas #}
+{% block title %}{{ meta_title }}{% endblock %}
+{% block desc %}{{ meta_desc }}{% endblock %}
+{# Settings #}
+{% block damping %}{{ settings.damping }}{% endblock %}
+{% block scrollimg %}{{ settings.scrollimg }}{% endblock %}
+
+{% block body %}
+    {% if post_thumb %}
+        <img src="{{ posts_img_directory }}/{{ post_thumb }}" />
+    {% endif %}
+    {{ post_content | raw }}
+{% endblock %}

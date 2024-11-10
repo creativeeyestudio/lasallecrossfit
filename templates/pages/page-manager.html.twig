@@ -1,0 +1,61 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<section class="block tab-container">
+    <h2>{{ title }}</h2>
+    <p><em>* Champs obligatoires</em></p>
+
+    {{ form_start(form) }}
+
+        {# <ul class="tabs-btn tabs">
+            {% for language in ['Français'] %}
+                <li><a class="tab {% if loop.index == 1 %}active{% endif %}" tabindex='2'>{{ language }}</a></li>
+            {% endfor %}
+        </ul> #}
+
+        <div class="tab-panes">
+            {% for language, prefix in {'Français': 'fr'} %}
+                <fieldset class="tab-pane {% if loop.index == 1 %}active{% endif %}">
+                    <legend>Contenu en {{ language }}</legend>
+
+                    {% set metaNameField = attribute(form, 'page_name_' ~ prefix) %}
+                    <p>{{ form_row(metaNameField, { 'value': attribute(_context, 'name_' ~ prefix)|default }) }}</p>
+
+                    {% set contentField = attribute(form, 'page_content_' ~ prefix) %}
+                    <p>
+                        {{ form_label(contentField) }}<br />
+                        {{ form_widget(contentField, { 'value': attribute(_context, 'pageContent_' ~ prefix)|default }) }}
+                    </p>
+
+                    {% set metaTitleField = attribute(form, 'page_meta_title_' ~ prefix) %}
+                    <p>{{ form_row(metaTitleField, { 'value': attribute(_context, 'metaTitle_' ~ prefix)|default }) }}</p>
+
+                    {% set metaDescField = attribute(form, 'page_meta_desc_' ~ prefix) %}
+                    <p>{{ form_row(metaDescField, { 'value': attribute(_context, 'metaDesc_' ~ prefix)|default }) }}</p>
+                </fieldset>
+            {% endfor %}
+        </div>
+
+        <hr />
+
+        <p>{{ form_row(form.page_url) }}</p>
+        
+        <p>{{ form_row(form.main_page) }}</p>
+
+        <p>{{ form_row(form.status) }}</p>
+
+        <p>{{ form_row(form.blocked_page) }}</p>
+
+        <!-- Submit -->
+        <div class="btn-list">
+            {{ form_row(form.page_submit) }}
+            {% if link is defined %}
+                <a class="btn-link-2" href="{{ path('web_page', {page_slug: link}) }}" target="_blank" rel="noopener">Voir la page</a>
+            {% endif %}
+        </div>
+    {{ form_end(form) }}
+
+</section>
+{% endblock %}

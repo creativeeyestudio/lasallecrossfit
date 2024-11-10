@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:ital@0;1&display=swap');
+
+$headings: (h1, $fsTitle1), (h2, $fsTitle2), (h3, $fsTitle3), (h4, $fsTitle4), (h5, $fsTitle5);
+
+@each $heading, $fontSize in $headings {
+  #{$heading} {
+    @include font(400, 32, true, $ff-title);
+    @media screen and (min-width: $md) {
+      @include font(400, $fontSize, true, $ff-title);
+    }
+  }
+}
+
+h1, h2, p{
+  @extend .margin-top-none;
+}
+
+h1, h2 {
+  margin-bottom: 30px;
+}
+
+p {
+  @include font(400, $fsBody, false, $ff-body);
+  &:last-child{
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,42 @@
+.heroscreen{
+    @extend .cover-img-no-sm-4-3;
+    .logotype{
+        display: block;
+        img{
+            @extend .position-absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 300px;
+            width: 65%;
+            height: auto;
+        }
+    }
+    img {
+        object-position: center;
+    }
+    @media screen and (min-width: calc($md + 1px)) {
+        .logotype{
+            display: none;
+        }
+    }
+    @media screen and (min-width: calc($sm + 1px)) {
+        height: 100vh;
+    }
+}
+
+body:not(.no-js) {
+    .heroscreen {
+        &::before {
+            content: '';
+            @extend .position-absolute;
+            @extend .wd-100;
+            @extend .ht-100;
+            background-color: rgba($color: #000000, $alpha: .5);
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+    }
+}

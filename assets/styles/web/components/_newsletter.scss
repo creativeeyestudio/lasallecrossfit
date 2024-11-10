@@ -1,0 +1,40 @@
+.newsletter{
+    .newsletter-title{
+        @include font(400, $fsTitle3, true, $ff-title);
+    }
+
+    #newsletter_form_email, #newsletter_form_submit {
+        height: 43px;
+    }
+
+    #newsletter_form_email{
+        color: $colorWt;
+        border-color: $colorWt;
+        padding-right: calc(110px + 8px);
+    }
+
+    #newsletter_form_submit{
+        top: 32px;
+        right: 0;
+        width: 110px;
+    }
+
+    .news-rgpd{
+        align-items: baseline;
+        margin-top: 1rem;
+        margin-left: 0;
+        label{
+            margin-left: 1rem;
+            line-height: 1.7;
+        }
+    }
+
+    @media screen and (max-width: $xs) {
+        .newsletter-title{
+            margin-bottom: $marge-m;
+        }
+        #newsletter_form_submit{
+            margin-top: $marge-m;
+        }
+    }
+}
