@@ -44,11 +44,13 @@ function scrollWeb() {
     const scrollWeb = new ScrollWeb(values.damping);
     if (screen.width > 1200) {
         scrollWeb.init;
-        console.log("Desktop");
     } else {
         scrollWeb.scrollMobile();
-        console.log("Mobile");
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        scrollWeb.scrollToAnchorIfPresent();
+    });
 
     return scrollWeb;
 }

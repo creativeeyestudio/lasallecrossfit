@@ -89,6 +89,22 @@ export class ScrollWeb {
             })
         })
 
+		const hash = window.location.hash;
+
+		if (hash) {
+			// Retire le # et cherche l'élément correspondant
+			const targetId = hash.substring(1);
+			const targetElement = document.getElementById(targetId);
+
+			if (targetElement) {
+				// Attend un petit délai pour que le DOM soit prêt (et éviter un 0,0)
+				setTimeout(() => {
+					const targetOffset = targetElement.offsetTop;
+					scrollbar.scrollTo(0, targetOffset, 800);
+				}, 100); // ajustable si besoin
+			}
+		}
+
         return scrollbar;
     }
 
@@ -114,5 +130,9 @@ export class ScrollWeb {
           console.log("pas de target");
         }
       }
+    }
+
+    scrollToAnchorIfPresent(duration = 800) {
+		
     }
 }
