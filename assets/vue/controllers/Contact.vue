@@ -76,7 +76,7 @@
                         body: JSON.stringify(formData)
                     };
 
-                    fetch('https://lasallecrossfit.fr/api/contact-form', requestOptions)
+                    fetch('https://www.lasallecrossfit.fr/api/contact-form', requestOptions)
                       .then(fetchResponse => {
                           if (!fetchResponse.ok) {
                               throw new Error(`La requête a échoué avec le code : ${fetchResponse.status}`);
