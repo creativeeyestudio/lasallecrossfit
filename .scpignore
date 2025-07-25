@@ -1,0 +1,8 @@
+.github/
+.docker/
+.matomo/
+node_modules/
+vendor/
+.git/
+.env
+.env.local
