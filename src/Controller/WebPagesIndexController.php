@@ -62,36 +62,42 @@ class WebPagesIndexController extends AbstractController
     public function sendContactForm(EntityManagerInterface $em, Request $request, ContactService $contactService) {
         $data = json_decode($request->getContent(), true);
 
-        $nom = $data['nom'];
-        $prenom = $data['prenom'];
-        $tel = $data['tel'];
-        $mail = $data['email'] ?? "example@xyz.fr";
-        $message = $data['message'];
-        $objet = $data['objet'];
+        $requiredFields = ['nom', 'prenom', 'tel', 'objet', 'message'];
+        foreach ($requiredFields as $field) {
+            if (empty($data[$field])) {
+                return $this->json(['error' => "Le champ '$field' est requis."], 400);
+            }
+        }
 
         
         $dataArray = [
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'tel' => $tel,
-            'mail' => $mail,
-            'message' => $message,
-            'objet' => $objet,
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'tel' => $data['tel'],
+            'mail' => $data['email'] ?? 'example@xyz.fr',
+            'message' => $data['message'],
+            'objet' => $data['objet'],
         ];
 
         try {
             // Envoi des e-mails
-            $this->formService->send($mail, 'contact@lasallecrossfit.fr', $objet, 'form-e-mail', $dataArray);
-            // $this->formService->send('no-reply@gym07.com', $dataArray['email'], "Gym 07 - Récapitulatif de votre demande", '', $dataArray);
+            $this->formService->send(
+                $dataArray['mail'],
+                'contact@lasallecrossfit.fr',
+                $dataArray['objet'],
+                'form-e-mail',
+                $dataArray
+            );
 
             // Enregistrement du contact
             $contact = $contactService->createContact();
-            $contact->setNom($data['nom']);
-            $contact->setPrenom($data['prenom']);
-            $contact->setTel($data['tel']);
-            $contact->setEmail($data['email']);
-            $contact->setObjet($data['objet']);
-            $contact->setMessage($data['message']);
+            $contact
+                ->setNom($dataArray['nom'])
+                ->setPrenom($dataArray['prenom'])
+                ->setTel($dataArray['tel'])
+                ->setEmail($dataArray['mail'])
+                ->setObjet($dataArray['objet'])
+                ->setMessage($dataArray['message']);
 
             $em->persist($contact);
             $em->flush();
@@ -101,8 +107,8 @@ class WebPagesIndexController extends AbstractController
             ], 200);
         } catch (\Throwable $th) {
             return $this->json([
-                'Response' => $th,
-                "data" => $data
+                'error' => 'Une erreur est survenue lors de l\'envoi.',
+                'exception' => $th->getMessage(), // Pour debug, à retirer en prod
             ], 500);
         }
     }

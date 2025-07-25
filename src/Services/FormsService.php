@@ -22,8 +22,9 @@ class FormsService
         }
 
         $email = (new TemplatedEmail())
-            ->from($from)
+            ->from(new Address($to))
             ->to(new Address($to))
+            ->replyTo($from)
             ->subject($subject)
             ->htmlTemplate("emails/$template.html.twig")
             ->context($context);

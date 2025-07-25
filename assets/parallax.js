@@ -15,9 +15,7 @@ export class Parallax extends ScrollWeb {
 
         ScrollTrigger.scrollerProxy("#website", {
             scrollTop(value) {
-                if (arguments.length) {
-                    scrollWeb.init.scrollTop = value;
-                }
+                if (arguments.length) scrollWeb.init.scrollTop = value;
                 return scrollWeb.init.scrollTop;
             }
         });

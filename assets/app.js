@@ -29,7 +29,7 @@ const values = {
 
 // Instantieur
 // -----------------------------------------------
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     createApp({
         components: { LastPosts, Contact }
     }).mount('#website');
@@ -42,13 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
 // -----------------------------------------------
 function scrollWeb() {
     const scrollWeb = new ScrollWeb(values.damping);
-    if (screen.width > 1200) {
-        scrollWeb.init;
-        console.log("Desktop");
-    } else {
-        scrollWeb.scrollMobile();
-        console.log("Mobile");
-    }
+    screen.width > 1200 
+        ? scrollWeb.init() 
+        : scrollWeb.scrollMobile();
+
+    window.addEventListener('DOMContentLoaded', () => scrollWeb.scrollToAnchorIfPresent());
 
     return scrollWeb;
 }
@@ -67,19 +65,9 @@ function parallax() {
 // -----------------------------------------------
 var htmlContent = document.querySelector('html');
 
-var navBtn = document.querySelectorAll('.toggle-nav');
-navBtn.forEach(btn => {
-    btn.addEventListener('click', function () {
-        htmlContent.classList.toggle('nav-open');
-    });
-});
+document.querySelectorAll('.toggle-nav').forEach(btn => btn.addEventListener('click', () => htmlContent.classList.toggle('nav-open')));
 
-var navLink = document.querySelectorAll('a[href^="#"]');
-navLink.forEach(link => {
-    link.addEventListener('click', function () {
-        htmlContent.classList.remove('nav-open');
-    });
-});
+document.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', () => htmlContent.classList.remove('nav-open')));
 
 
 // Popup
@@ -88,15 +76,13 @@ var closePopup = document.querySelector('.close-popup');
 var popup = document.querySelector('.popup');
 
 if (popup != undefined && closePopup != undefined) {
-    closePopup.addEventListener('click', () => {
-        popup.classList.add('removed');
-    });
+    closePopup.addEventListener('click', () => popup.classList.add('removed'));
 }
 
 
 // Loader Site
 // -----------------------------------------------
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     function closeLoader() {
         document.querySelector('.loader').classList.add('open');
     }
