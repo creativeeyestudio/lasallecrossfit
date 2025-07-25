@@ -1,0 +1,64 @@
+name: Deploy to SFTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: prod
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      MAILER_DSN: ${{ secrets.MAILER_DSN }}
+      
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      
+      - name: Configure Symfony environment
+        run: |
+          # Remplacer la valeur de DATABASE_URL dans le fichier .env
+          grep -v '^DATABASE_URL=' .env > .env.tmp && echo "DATABASE_URL='${DATABASE_URL}'" >> .env.tmp && mv .env.tmp .env
+      
+      - name: Configure Mailer DSN
+        run: |
+          # Remplacer la valeur de MAILER_DSN dans le fichier .env
+          grep -v '^MAILER_DSN=' .env > .env.tmp && echo "MAILER_DSN='${MAILER_DSN}'" >> .env.tmp && mv .env.tmp .env
+      
+      - name: Install Node.js and Yarn
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.18.1' # Choose the Node.js version you need
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'yarn'
+      - run: yarn --version
+
+      - name: Install dependencies
+        run: composer install
+
+      - run: yarn install 
+      
+      - name: Build assets with Yarn encore
+        run: yarn encore production
+
+      - name: Clear Symfony cache
+        run: php bin/console cache:clear --env=prod
+
+      - name: Deploy to SFTP
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SFTP_PORT }}
+          source: "., !.docker/*, !.github/*, !.matomo/*" # Local directory to upload
+          target: ${{ secrets.SFTP_REMOTE_PATH }} # Remote directory

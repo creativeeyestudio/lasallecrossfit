@@ -26,13 +26,7 @@ export class ScrollWeb {
         });
       
         [].forEach.call(document.querySelectorAll('[data-aos]'), (el) => {
-          scrollbar.addListener(() => {
-            if (scrollbar.isVisible(el)) {
-              el.classList.add('aos-animate');
-            } else {
-              el.classList.remove('aos-animate');
-            }
-          });
+          scrollbar.addListener(() => el.classList.toggle('aos-animate', scrollbar.isVisible(el)));
         });
 
         // Détection du Scroll
@@ -40,43 +34,34 @@ export class ScrollWeb {
         scrollbar.addListener(function({ offset }){
             const scrollY = scrollbar.offset.y;
 
-            if (scrollY > 50) {
-                document.querySelector('html').classList.add('onScroll');
-            } else {
-                document.querySelector('html').classList.remove('onScroll');
-            }
+            document.querySelector('html').classList.toggle('onScroll', scrollY > 50);
 
             // Mettez en évidence le lien de navigation correspondant à la section actuelle
             const currentSection = findCurrentSection(offset.y);
             mainNavLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === currentSection) {
-                    link.classList.add('active');
-                }
+                if (link.getAttribute('href').slice(1) === currentSection) link.classList.add('active');
             });
         })
-          console.log('desktop');
 
         function findCurrentSection(scrollY) {
             let currentSection = '';
           
             // Parcourez les sections et déterminez la section actuelle
             for (const section of document.querySelectorAll('section')) {
-              const sectionTop = section.offsetTop - 100;
-              const sectionHeight = section.clientHeight;
-          
-              if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                currentSection = section.id;
-              }
+				const sectionTop = section.offsetTop - 100;
+				const sectionHeight = section.clientHeight;
+			
+				if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) currentSection = section.id;
             }
           
             return currentSection;
-          }
+        }
 
         // Scroll au click d'une ancre
         const navLinks = document.querySelectorAll('a[href^="#"]');
         navLinks.forEach(btn => {
-            btn.addEventListener('click', function(){
+            btn.addEventListener('click', () => {
                 const margin = 0;
                 const target = btn.getAttribute('href') || btn.getAttribute('data-link');
                 const anchor = document.querySelector(target);
@@ -97,11 +82,7 @@ export class ScrollWeb {
 			const targetElement = document.getElementById(targetId);
 
 			if (targetElement) {
-				// Attend un petit délai pour que le DOM soit prêt (et éviter un 0,0)
-				setTimeout(() => {
-					const targetOffset = targetElement.offsetTop;
-					scrollbar.scrollTo(0, targetOffset, 800);
-				}, 100); // ajustable si besoin
+				setTimeout(() => scrollbar.scrollTo(0, targetElement.offsetTop, 800), 100); // ajustable si besoin
 			}
 		}
 

@@ -19,9 +19,7 @@ import { fileManager } from 'mini-file-manager';
 var tabs = require('tabs');
 var container = document.querySelector('.tab-container');
 
-if (container != null) {
-    tabs(container);
-}
+if (container != null) tabs(container);
 
 
 /* MINI FILE MANAGER
@@ -40,12 +38,10 @@ if (dragDropList) {
         const sortable = new Sortable(dragDropList, {
             group: 'nested',
             animation: 150,
-            onEnd: (event) => {
+            onEnd: () => {
                 // Mettre à jour l'ordre des éléments après le glisser-déposer
                 const lines = dragDropList.querySelectorAll('.nav-item');
-                lines.forEach((line, index) => {
-                    line.dataset.order = index + 1;
-                });
+                lines.forEach((line, index) => line.dataset.order = index + 1);
                 changeOrderLinks();
             },
         });
@@ -56,9 +52,7 @@ if (dragDropList) {
             const subsortable = new Sortable(elem, {
                 group: 'nested',
                 animation: 150,
-                onEnd: (event) => {
-                    changeOrderLinks();
-                },
+                onEnd: () => changeOrderLinks(),
             })
         }
     });
@@ -72,19 +66,14 @@ function changeOrderLinks() {
         order: line.dataset.order,
         sublist: line.parentElement.getAttribute('data-sublist')
     }));
-    console.log(orderData);
 
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData),
     })
-    .then((response) => {
-        console.log('Enregistrement de l\'ordre terminé : ', response);
-    })
-    .catch((error) => {
-        console.error('Erreur lors de l\'enregistrement de l\'ordre :', error);
-    });
+    .then((response) => console.log('Enregistrement de l\'ordre terminé : ', response))
+    .catch((error) => console.error('Erreur lors de l\'enregistrement de l\'ordre :', error));
 }
 
 /* SECTION - NAVIGATION
@@ -93,7 +82,7 @@ function changeOrderLinks() {
 // Sélecteur de menu
 const navSelect = document.querySelector('.nav-select');
 if (navSelect) {
-    navSelect.addEventListener('change', function() {
+    navSelect.addEventListener('change', () => {
         const navSelected = navSelect.value; 
         window.location.href = '/admin/navigation/' + navSelected;
     })
@@ -111,15 +100,12 @@ if (menuRemove.length > 0) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(menuId),
             })
-            .then((response) => {
+            .then(() => {
                 const navLinkRemoved = document.querySelector(`.menu-${menuId}`);
                 navLinkRemoved.style.display = 'none';
                 navLinkRemoved.style.visibility = 'hidden';
-                console.log('Suppression effectuée : ', response);
             })
-            .catch((error) => {
-                console.error('Erreur lors de la suppression :', error);
-            });
+            .catch((error) => console.error('Erreur lors de la suppression :', error));
         });
     });
 }
@@ -130,18 +116,16 @@ const popupContainer = document.querySelector('#popup-container');
 if (navLinksUpdate) {
     const popup = document.querySelector('#popup');
     navLinksUpdate.forEach((link) => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', () => {
             const url = link.dataset.url;
             popupContainer.style.display = 'flex';
             popup.src = url;
-            console.log(url);
-        })
-        
+        }) 
     })
 }
 
 if (popupContainer) {
-    popupContainer.addEventListener('click', function () {
+    popupContainer.addEventListener('click', () => {
         popupContainer.style.display = 'none';
     })
 }
@@ -158,15 +142,12 @@ if (navLinksRemove.length > 0 && dragDropList) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(linkId),
             })
-            .then((response) => {
+            .then(() => {
                 const navLinkRemoved = document.querySelector(`.nav-link-${linkId}`);
                 navLinkRemoved.style.display = 'none';
                 navLinkRemoved.style.visibility = 'hidden';
-                console.log('Suppression effectuée : ', response);
             })
-            .catch((error) => {
-                console.error('Erreur lors de la suppression :', error);
-            });
+            .catch((error) => console.error('Erreur lors de la suppression :', error));
         });
     });
 }
