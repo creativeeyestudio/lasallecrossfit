@@ -62,3 +62,4 @@ jobs:
           port: ${{ secrets.SFTP_PORT }}
           source: "., !.github/*" # Local directory to upload
           target: ${{ secrets.SFTP_REMOTE_PATH }} # Remote directory
+          debug: true
